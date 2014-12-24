@@ -1,0 +1,5 @@
+# Ignore btsync's .sync stuff
+.sync
+
+# Ignore .pyc files
+*.pyc
