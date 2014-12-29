@@ -1,5 +1,6 @@
 # Ignore btsync's .sync stuff
 .sync
+.DS_Store
 
 # Ignore .pyc files
 *.pyc
