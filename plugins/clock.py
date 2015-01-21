@@ -15,9 +15,9 @@ class Clock(object):
 		time_idx = time.time()%self.cycle
 
 		# Move through the color circle, setting hue to our position in the cycle,
-		# locking saturation and value to 1
+		# locking saturation to 1, and value to 0.25 (this will help with overheating while lights are coiled)
 		color_out = Color()
-		color_out.setHSV(time_idx/self.cycle, 1, 1)
+		color_out.setHSV(time_idx/self.cycle, 1, 0.25)
 
 		# Return the color we generate.  We ignore input color_in
 		return color_out

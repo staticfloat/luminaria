@@ -14,6 +14,8 @@ try:
 			self.b_channel = rgb_channels[2]
 			self.pwm = PWM(i2c_addr)
 			self.pwm.setPWMFreq(pwm_freq)
+			self.last_values = {self.r_channel:None, self.g_channel:None, self.b_channel:None}
+			self.set_rgb(0,0,0)
 
 		# Gotta clamp to [0, 1], then translate to 12-bit PWM number
 		def floatmap(self, intensity):
@@ -22,8 +24,12 @@ try:
 			return int_tensity
 
 		# Given a channel number and an intensity in [0.0, 1.0], send the appropriate PWM command
+		# Only actually send the command if we're changing the int_tensity to avoid flicker
 		def set_channel(self, channel_num, intensity):
-			self.pwm.setPWM(channel_num, self.floatmap(intensity), 0)
+			int_tensity = self.floatmap(intensity)
+			if int_tensity != self.last_values[channel_num]:
+				self.pwm.setPWM(channel_num, int_tensity, 0)
+				self.last_values[channel_num] = int_tensity
 
 		def set_rgb(self, r, g, b, quiet_fool=False):
 			self.set_channel(self.r_channel, r)
@@ -47,4 +53,3 @@ except:
 		def set_color(self, color, quiet_fool=False):
 			if not quiet_fool:
 				print color
-

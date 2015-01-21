@@ -1,0 +1,48 @@
+Build information for Luminaria
+
+
+Raspberri Pi(1){
+	Source: 	http://www.amazon.com/Raspberry-Pi-Model-512MB-Computer/dp/B00LPESRUK
+	Cost: 		$35
+}
+
+PWM Chip(1){
+	Source: 	https://www.adafruit.com/products/815
+	Cost:		$15 
+}
+
+Breadboard(2){
+	Source:		http://www.amazon.com/gp/product/B00ARUF2JM/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1
+	Cost:		$7 / 6 boards (Used 2)
+}
+
+Wiring(8){
+	Source:		(F-F) https://www.sparkfun.com/products/11710
+	Cost:		$5 / pk 20 (Used 4)
+
+	Source:		(M-F) https://www.sparkfun.com/products/9140
+	Cost:		$4 / pk10 (Used 4)
+}
+
+Transistors(3){
+	Source: 	https://www.sparkfun.com/products/10213
+	Cost:		$0.95/ea
+}
+
+Base(1){
+	Info: 	Extruded Acrylic
+	Source: 	Tap Plastics (South Lake Union)
+	Cost:		$1
+}
+
+Standoffs(8){
+	Info:	Aluminium, 1/4" 
+	Source:		Stone Way hardware (Stone Way)
+	Cost:		$5 / 8 
+}
+
+Machine Screws(8){
+	Info: 	SS 2-56 Machine Screw, socket cap head, 1/2" long
+	Source:		Tacoma Screw (Fremont)
+	Cost:		$1 / 8
+}

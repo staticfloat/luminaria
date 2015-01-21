@@ -18,6 +18,8 @@ from animation_utils import *
 
 class Email(object):
     def __init__(self, username, password, blink_duration=.5, blink_skew=.5, interpause=1, check_interval=5):
+        self.username = username
+        self.password = password
         self.blink_duration = blink_duration
         self.blink_skew = blink_skew
         self.interpause = interpause
@@ -27,16 +29,13 @@ class Email(object):
         self.anim_queue = AnimationQueue()
         self.attenuation = 1.0
 
-        # Login over IMAP
-        self.imap = imaplib.IMAP4_SSL('imap.gmail.com')
-        self.imap.login(username, password)
-        self.imap.select('inbox')
+        # We delay logging in over IMAP since it freezes up the pi for a bit, and we like
+        # our awesomely smooth intro animation.
+        self.imap = None
 
-        # Store the last time we checked for unread messages
-        self.last_check = time.time()
-
-        # Store the last unread message IDs, so we know when a new message appears
-        self.last_unread = self.get_unread()
+        # Store the last time we checked for unread messages (Don't check for the first 10 seconds)
+        self.last_check = time.time() + 10
+        
 
 
     # Returns a list of unread message IDs
@@ -50,26 +49,34 @@ class Email(object):
         
         # If we haven't checked recently, then let's check to see if we have a new email:
         if curr_time > self.last_check + self.check_interval:
-            # Otherwise, let's check for messages
-            self.last_check = curr_time
-            unread = self.get_unread()
+            # If we've never logged in before, do that here over IMAP
+            if self.imap == None:
+                self.imap = imaplib.IMAP4_SSL('imap.gmail.com')
+                self.imap.login(self.username, self.password)
+                self.imap.select('inbox')
+                self.last_unread = self.get_unread()
+                self.last_check = curr_time
+            else:
+                # Otherwise, let's check for messages
+                self.last_check = curr_time
+                unread = self.get_unread()
 
-            # If any of the messages that are currently unread were not unread last check, then
-            # queue up the animations to do a double-blink, using blink_duration and interpause
-            if any([z for z in unread if not z in self.last_unread]):
-                # First, queue up a 1 -> 0 and 0 -> 1 easing, using sin easing
-                self.anim_queue.push(ease(1, 0, self.blink_skew*self.blink_duration/2, sin_ease))
-                self.anim_queue.push(ease(0, 1, (1 - self.blink_skew)*self.blink_duration/2, sin_ease))
+                # If any of the messages that are currently unread were not unread last check, then
+                # queue up the animations to do a double-blink, using blink_duration and interpause
+                if any([z for z in unread if not z in self.last_unread]):
+                    # First, queue up a 1 -> 0 and 0 -> 1 easing, using sin easing
+                    self.anim_queue.push(ease(1, 0, self.blink_skew*self.blink_duration/2, sin_ease))
+                    self.anim_queue.push(ease(0, 1, (1 - self.blink_skew)*self.blink_duration/2, sin_ease))
 
-                # Then queue up a 1 -> 1 easing using linear easing (this is the interpause)
-                self.anim_queue.push(ease(1, 1, self.interpause))
+                    # Then queue up a 1 -> 1 easing using linear easing (this is the interpause)
+                    self.anim_queue.push(ease(1, 1, self.interpause))
 
-                # Finally, bounce 1 -> 0 -> 1 again:
-                self.anim_queue.push(ease(1, 0, self.blink_skew*self.blink_duration/2, sin_ease))
-                self.anim_queue.push(ease(0, 1, (1 - self.blink_skew)*self.blink_duration/2, sin_ease))
+                    # Finally, bounce 1 -> 0 -> 1 again:
+                    self.anim_queue.push(ease(1, 0, self.blink_skew*self.blink_duration/2, sin_ease))
+                    self.anim_queue.push(ease(0, 1, (1 - self.blink_skew)*self.blink_duration/2, sin_ease))
 
-            # Remember to set the last unread here!
-            self.last_unread = unread
+                # Remember to set the last unread here!
+                self.last_unread = unread
 
         # Animate the attenuation if we're blinking
         animated_attenuation = self.anim_queue.animate(default_value=self.attenuation)

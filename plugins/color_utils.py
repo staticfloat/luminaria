@@ -23,19 +23,32 @@ class Color(object):
 		self.g = float(g)
 		self.b = float(b)
 
+	def setR(self, r):
+		self.r = float(r)
+
+	def setG(self, g):
+		self.g = float(g)
+
+	def setB(self, b):
+		self.b = float(b)
+
 	def setHSV(self, h, s, v):
 		rgb = colorsys.hsv_to_rgb(h,s,v)
 		self.r = float(rgb[0])
 		self.g = float(rgb[1])
 		self.b = float(rgb[2])
 
-	# Return a new color, mixing this color and the other color together linearly, where an amount of
-	# 0 means completely the other color, and 1 means completely the self color.
-	def mix(self, other, amnt):
-		return amnt*self + (1 - amnt)*other
+	def setH(self, h_new):
+		h, s, v = self.getHSV()
+		selt.setHSV(h_new, s, v)
 
+	def setS(self, s_new):
+		h, s, v = self.getHSV()
+		selt.setHSV(h, s_new, v)
 
-
+	def setV(self, v_new):
+		h, s, v = self.getHSV()
+		selt.setHSV(h, s, v_new)
 
 
 	###############################################################################################

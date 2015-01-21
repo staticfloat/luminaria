@@ -28,7 +28,7 @@ import time, math
 
 
 # Given start value, end value, time duration, and time into animation cycle, return the interpolated value
-def linear_ease(start, end, duration, t):
+def linear_ease(start, end, duration, t): 
 	return start + (end - start)*t/duration
 
 # The same as for linear above, but do sinusoidal easing rather than linear easing

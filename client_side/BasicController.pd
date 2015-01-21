@@ -1,0 +1,98 @@
+#N canvas 732 23 707 855 10;
+#X declare -lib mrpeach;
+#N canvas 645 232 761 502 ControlGui 0;
+#X obj 106 21 import mrpeach;
+#X msg 126 115 disconnect;
+#X obj 106 386 udpsend;
+#X obj 136 353 packOSC;
+#X obj 106 -2 loadbang;
+#X obj 106 -22 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 311 23 vsl 15 128 0 1 0 0 empty empty R 0 -9 0 10 -258113 -1
+-1 5251 1;
+#X obj 397 254 metro 100;
+#X obj 311 292 pack f f f;
+#X msg 136 331 sendtyped /rgb fff \$1 \$2 \$3;
+#X obj 339 23 vsl 15 128 0 1 0 0 15 empty G 0 -9 0 10 -4034 -1 -1 8200
+1;
+#X obj 368 23 vsl 15 128 0 1 0 0 empty empty B 0 -9 0 10 -4160 -1 -1
+0 1;
+#X obj 493 21 vsl 15 128 0 1 0 0 empty empty H 0 -9 0 10 -162280 -1
+-1 2878 1;
+#X obj 493 290 pack f f f;
+#X obj 521 21 vsl 15 128 0 1 0 0 15 empty S 0 -9 0 10 -128992 -1 -1
+12700 1;
+#X obj 550 21 vsl 15 128 0 1 0 0 empty empty V 0 -9 0 10 -99865 -1
+-1 8200 1;
+#X obj 493 316 hsv2rgb;
+#X obj 311 -23 unpack f f f;
+#X obj 311 319 rgb2hsv;
+#X obj 311 370 spigot;
+#X obj 493 -25 unpack f f f;
+#X obj 423 63 hradio 15 1 0 2 empty empty RGB<->HVS -10 -8 0 10 -262144
+-1 -1 1;
+#X obj 410 292 route 0 1;
+#X msg 410 318 0;
+#X msg 445 319 1;
+#X obj 344 348 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 493 369 spigot;
+#X obj 526 347 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 411 345 0;
+#X msg 446 346 1;
+#X obj 346 255 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 534 253 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 116 87 connect 10.10.10.211 7331;
+#X msg 106 60 connect 10.10.11.201 7331;
+#X connect 1 0 2 0;
+#X connect 3 0 2 0;
+#X connect 4 0 0 0;
+#X connect 4 0 7 0;
+#X connect 4 0 32 0;
+#X connect 5 0 4 0;
+#X connect 6 0 8 0;
+#X connect 7 0 8 0;
+#X connect 7 0 13 0;
+#X connect 8 0 9 0;
+#X connect 8 0 18 0;
+#X connect 9 0 3 0;
+#X connect 10 0 8 1;
+#X connect 10 0 30 0;
+#X connect 11 0 8 2;
+#X connect 11 0 30 0;
+#X connect 12 0 13 0;
+#X connect 13 0 16 0;
+#X connect 14 0 13 1;
+#X connect 14 0 31 0;
+#X connect 15 0 13 2;
+#X connect 15 0 31 0;
+#X connect 16 0 26 0;
+#X connect 17 0 6 0;
+#X connect 17 1 10 0;
+#X connect 17 2 11 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 20 0 12 0;
+#X connect 20 1 14 0;
+#X connect 20 2 15 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 22 0 24 0;
+#X connect 22 1 28 0;
+#X connect 22 1 29 0;
+#X connect 23 0 27 0;
+#X connect 24 0 25 0;
+#X connect 25 0 19 1;
+#X connect 26 0 17 0;
+#X connect 27 0 26 1;
+#X connect 28 0 25 0;
+#X connect 29 0 27 0;
+#X connect 30 0 8 0;
+#X connect 31 0 13 0;
+#X connect 32 0 2 0;
+#X connect 33 0 2 0;
+#X coords 0 -1 1 1 320 240 1 300 0;
+#X restore 47 32 pd ControlGui;

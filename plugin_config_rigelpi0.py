@@ -9,7 +9,7 @@ plugin_objs = []
 
 # Simplest example: clock. This guy takes in one parameter, the cycle time period.  We will use
 # the default value, take a look inside plugins/clock.py to find the default cycle value.
-clock = pluginList['clock']()
+clock = pluginList['clock'](cycle=200)
 plugin_objs.append(clock)
 
 # Slighly more complicated example: strobe.  This guy takes in two parameter, the cycle duration
@@ -24,15 +24,24 @@ plugin_objs.append(clock)
 
 # Even more complicated example: email.  This guy has two required parameters: username/password
 # We'll pass those in, along with two optional parameters, blink_duration and interpause:
-email = pluginList['email'](
-	username="staticfloat@gmail.com",
-	password="kybimsjmy.google",
-	blink_duration=3.0,
-	blink_skew=.25,
-	interpause=.5
-)
-plugin_objs.append(email)
+#email = pluginList['email'](
+#	username="staticfloat@gmail.com",
+#	password="kybimsjmy.google",
+#	blink_duration=4.0,
+#	blink_skew=.1,
+#	interpause=0
+#)
+#plugin_objs.append(email)
 
 # Lastly, the big one.  Audio.  No options.  This guy's way too cool for that.
 audio = pluginList['audio']()
 plugin_objs.append(audio)
+
+#audiomassacre = pluginList['audiomassacre']
+
+osc = pluginList['osc']()
+plugin_objs.append(osc)
+
+# We put the super-awesome startup plugin at the end so that it takes complete control during startup.  >:D
+startup = pluginList['startup']()
+plugin_objs.append(startup)

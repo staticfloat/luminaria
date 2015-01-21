@@ -1,0 +1,23 @@
+#N canvas 257 185 450 300 10;
+#X declare -lib mrpeach;
+#X obj 41 58 import mrpeach;
+#X obj 42 31 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 42 98 connect 10.10.10.201 7331;
+#X msg 53 121 disconnect;
+#X obj 42 275 udpsend;
+#X obj 86 225 packOSC;
+#X obj 67 29 loadbang;
+#X msg 35 78 connect 10.10.11.229 7331;
+#X msg 86 149 sendtyped /rgb fff 0 0 1.67772e+07;
+#X msg 96 172 sendtyped /rgb fff 0 1.67772e+07 0;
+#X msg 106 197 sendtyped /rgb fff 1.67772e+07 0 0;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 3 0 4 0;
+#X connect 5 0 4 0;
+#X connect 6 0 0 0;
+#X connect 7 0 4 0;
+#X connect 8 0 5 0;
+#X connect 9 0 5 0;
+#X connect 10 0 5 0;
