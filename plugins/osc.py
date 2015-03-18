@@ -19,17 +19,19 @@ class Osc(object):
 
 		# Create handlers for "/rgb" and "/hsv".  This causes a packet to "/rgb" to call self.set_rgb()
 		# and a packet to "/hsv" to call self.set_hsv(), with the arguments path, tags, args, source
+		self.server.addMsgHandler( "/rgbw", lambda p, t, a, s: self.set_rgbw(p, t, a, s))
 		self.server.addMsgHandler( "/rgb", lambda p, t, a, s: self.set_rgb(p, t, a, s))
 		self.server.addMsgHandler( "/r", lambda p, t, a, s: self.set_r(p, t, a, s))
 		self.server.addMsgHandler( "/g", lambda p, t, a, s: self.set_g(p, t, a, s))
 		self.server.addMsgHandler( "/b", lambda p, t, a, s: self.set_b(p, t, a, s))
+		self.server.addMsgHandler( "/w", lambda p, t, a, s: self.set_w(p, t, a, s))
 		self.server.addMsgHandler( "/hsv", lambda p, t, a, s: self.set_hsv(p, t, a, s))
 		self.server.addMsgHandler( "/h", lambda p, t, a, s: self.set_h(p, t, a, s))
 		self.server.addMsgHandler( "/s", lambda p, t, a, s: self.set_s(p, t, a, s))
 		self.server.addMsgHandler( "/v", lambda p, t, a, s: self.set_v(p, t, a, s))
 
 		# Initialize variables
-		self.color = Color(0.0, 0.0, 0.0)
+		self.color = Color(0.0, 0.0, 0.0, 0.0)
 		self.opacity = 0.0
 		self.timeout = timeout
 		self.timeout_fade_duration = timeout_fade_duration
@@ -51,6 +53,10 @@ class Osc(object):
 
 
 	# Set the current color in either RGB or HSV colorspace
+	def set_rgbw(self, path, tags, args, source):
+		self.color.setRGBW(*args)
+		self.got_a_packet()
+
 	def set_rgb(self, path, tags, args, source):
 		self.color.setRGB(*args)
 		self.got_a_packet()
@@ -68,6 +74,9 @@ class Osc(object):
 		self.color.setB(args[0])
 		self.got_a_packet()
 
+	def set_w(self, path, tags, args, source):
+		self.color.setB(args[0])
+		self.got_a_packet()
 		
 	def set_hsv(self, path, tags, args, source):
 		self.color.setHSV(*args)

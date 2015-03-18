@@ -28,7 +28,7 @@ obs.schedule(event_handler, ".", recursive=True)
 obs.start()
 
 # Initialize our LED strip
-led = LEDStrip(rgb_channels=(12,13,14))
+led = LEDStrip(rgbw_channels=(12,13,14,15))
 
 
 
@@ -40,7 +40,7 @@ def error_blink():
 	from plugins import strobe
 	s = strobe.Strobe(cycle=1)
 	while True:
-		color = s.next(Color(1,0,0))
+		color = s.next(Color(1,0,0,0))
 		led.set_color(color, quiet_fool=True)
 		time.sleep(0.005)
 
@@ -64,7 +64,7 @@ except Exception, err:
 try:
 	while True:
 		# Start with white
-		color = Color(1, 1, 1)
+		color = Color(1, 1, 1, 0)
 
 		# Filter through all plugins, sequentially
 		for plugin in plugin_config.plugin_objs:

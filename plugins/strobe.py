@@ -4,7 +4,7 @@ from color_utils import Color
 
 # Super simple; when time mod cycle is zero, show input color.  Otherwise, show off_color.
 class Strobe(object):
-    def __init__(self, cycle=1, off_color=Color(0,0,0)):
+    def __init__(self, cycle=1, off_color=Color(0,0,0,0)):
         self.cycle = cycle/2.0
         self.off_color = off_color
 

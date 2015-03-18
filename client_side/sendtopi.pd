@@ -1,0 +1,62 @@
+#N canvas 320 151 761 538 10;
+#X declare -lib mrpeach;
+#X obj 99 55 import mrpeach;
+#X obj 530 335 udpsend;
+#X obj 530 303 packOSC;
+#X obj 99 32 loadbang;
+#X obj 99 12 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 530 281 sendtyped /rgb fff \$1 \$2 \$3;
+#X obj 530 258 pack f f f;
+#X obj 510 229 inlet;
+#X obj 111 111 bng 15 250 50 0 empty empty The_Creep 17 7 0 10 -262144
+-1 -1;
+#X obj 111 137 bng 15 250 50 0 empty empty Diaerocog 17 7 0 10 -262144
+-1 -1;
+#X obj 111 163 bng 15 250 50 0 empty empty DXARTS_Ballard 17 7 0 10
+-262144 -1 -1;
+#X obj 111 189 bng 15 250 50 0 empty empty Ripicog 17 7 0 10 -262144
+-1 -1;
+#X obj 548 228 inlet;
+#X obj 587 228 inlet;
+#X obj 282 170 delay 100;
+#X obj 282 96 delay 100;
+#X msg 282 118 connect 10.10.11.201 7331;
+#X obj 282 245 delay 100;
+#X msg 282 267 connect 10.1.10.159 7331;
+#X obj 282 319 delay 100;
+#X msg 282 341 connect 10.10.10.200 7331;
+#X msg 282 74 disconnect;
+#X msg 282 148 disconnect;
+#X msg 282 223 disconnect;
+#X msg 282 297 disconnect;
+#X msg 282 192 connect 10.10.10.211 7331;
+#X connect 2 0 1 0;
+#X connect 3 0 0 0;
+#X connect 4 0 3 0;
+#X connect 5 0 2 0;
+#X connect 6 0 5 0;
+#X connect 7 0 6 0;
+#X connect 8 0 21 0;
+#X connect 8 0 15 0;
+#X connect 9 0 22 0;
+#X connect 9 0 14 0;
+#X connect 10 0 23 0;
+#X connect 10 0 17 0;
+#X connect 11 0 24 0;
+#X connect 11 0 19 0;
+#X connect 12 0 6 1;
+#X connect 13 0 6 2;
+#X connect 14 0 25 0;
+#X connect 15 0 16 0;
+#X connect 16 0 1 0;
+#X connect 17 0 18 0;
+#X connect 18 0 1 0;
+#X connect 19 0 20 0;
+#X connect 20 0 1 0;
+#X connect 21 0 1 0;
+#X connect 22 0 1 0;
+#X connect 23 0 1 0;
+#X connect 24 0 1 0;
+#X connect 25 0 1 0;
+#X coords 0 -1 1 1 150 120 2 100 100;

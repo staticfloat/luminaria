@@ -6,14 +6,18 @@ import colorsys
 # etc... Note that while a color object's r, g and b values may exceed 1.0 and fall below 0.0,
 # when outputting to the LED light strip, the colors will be clamped to the [0, 1] range
 class Color(object):
-	def __init__(self, r=0, g=0, b=0):
+	def __init__(self, r=0, g=0, b=0, w=0):
 		self.r = float(r)
 		self.g = float(g)
 		self.b = float(b)
+		self.w = float(w)
 
 	# Get/set color values in different color spaces
 	def getRGB(self):
 		return (self.r, self.g, self.b)
+
+	def getRGBW(self):
+		return (self.r, self.g, self.b, self.w)
 
 	def getHSV(self):
 		return colorsys.rgb_to_hsv(self.r, self.g, self.b)
@@ -23,6 +27,12 @@ class Color(object):
 		self.g = float(g)
 		self.b = float(b)
 
+	def setRGBW(self, r, g, b, w):
+		self.r = float(r)
+		self.g = float(g)
+		self.b = float(b)
+		self.w = float(w)
+
 	def setR(self, r):
 		self.r = float(r)
 
@@ -31,6 +41,9 @@ class Color(object):
 
 	def setB(self, b):
 		self.b = float(b)
+
+	def setW(self,w):
+		self.w = float(w)
 
 	def setHSV(self, h, s, v):
 		rgb = colorsys.hsv_to_rgb(h,s,v)

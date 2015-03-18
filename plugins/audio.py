@@ -71,6 +71,7 @@ class Audio(object):
 		color_out.r = min(color_out.r, 1)
 		color_out.g = min(color_out.g, 1)
 		color_out.b = min(color_out.b, 1)
+		color_out.w = min(color_out.w, 1)
 
 
 		return color_out
