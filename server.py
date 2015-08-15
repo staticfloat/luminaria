@@ -73,8 +73,8 @@ try:
 		# Output final color, IFF this color is different than what we had last time!
 		led.set_color(color)
 
-		# Sleep for 1ms then DO IT AGAIN!!!!
-		time.sleep(.001)
+		# Sleep for 10ms then DO IT AGAIN!!!!
+		time.sleep(.01)
 
 except KeyboardInterrupt:
 	# Explicitly do nothing when we hit CTRL-C
