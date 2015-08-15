@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import time, util
+import time
 from color_utils import Color
 
 # Super simple; when time mod cycle is zero, show input color.  Otherwise, show off_color.
